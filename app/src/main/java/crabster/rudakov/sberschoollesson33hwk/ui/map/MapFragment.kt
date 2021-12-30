@@ -41,7 +41,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(p0: GoogleMap) {
         mapViewModel.coordinates().observe(viewLifecycleOwner) {
             p0.apply {
-                val coordinates = LatLng(it[0].latitude.toDouble(), it[0].longitude.toDouble())
+                val coordinates = LatLng(it.latitude, it.longitude)
                 clear()
                 addMarker(
                     MarkerOptions()
