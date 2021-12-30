@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">SberSchoolLesson33HWK</string>
+    <string name="map_key">AIzaSyCNjT2O7JRS4dsXWE2924Q7xmWxAJTnuug</string>
+    <string name="fragment_label_map">MAP</string>
+    <string name="fragment_label_weather">WEATHER</string>
+    <string name="navigation_bottom_bar_weather">Weather</string>
+    <string name="navigation_bottom_bar_map">Map</string>
+    <string name="application_title">Weather in your current location</string>
+    <string name="map_title">You are here now</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="map_marker">You\'re here!</string>
+</resources>
