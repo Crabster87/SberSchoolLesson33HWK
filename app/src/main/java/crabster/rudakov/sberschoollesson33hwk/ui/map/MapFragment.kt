@@ -1,6 +1,7 @@
 package crabster.rudakov.sberschoollesson33hwk.ui.map
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +14,11 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import crabster.rudakov.sberschoollesson33hwk.R
 import crabster.rudakov.sberschoollesson33hwk.databinding.FragmentMapBinding
+import crabster.rudakov.sberschoollesson33hwk.ui.weather.WeatherFragmentSharedViewModel
 
 class MapFragment : Fragment(), OnMapReadyCallback {
 
-    private lateinit var mapViewModel: MapViewModel
+    private lateinit var weatherFragmentSharedViewModel: WeatherFragmentSharedViewModel
     private var _binding: FragmentMapBinding? = null
     private val binding get() = _binding!!
 
@@ -25,10 +27,11 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        mapViewModel =
-            ViewModelProvider(this)[MapViewModel::class.java]
-
         _binding = FragmentMapBinding.inflate(inflater, container, false)
+        weatherFragmentSharedViewModel =
+            ViewModelProvider(this)[WeatherFragmentSharedViewModel::class.java]
+//        Log.d("MAP FRAGMENT REPORTS ",
+//            "LAT ${weatherFragmentSharedViewModel.getCoordinate().value?.latitude} " + "LONG ${weatherFragmentSharedViewModel.getCoordinate().value?.longitude}")
 
         return binding.root
     }
@@ -39,10 +42,12 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(p0: GoogleMap) {
-        mapViewModel.coordinates().observe(viewLifecycleOwner) {
+        weatherFragmentSharedViewModel.getCoordinate().observe(viewLifecycleOwner) {
             p0.apply {
                 val coordinates = LatLng(it.latitude, it.longitude)
-                clear()
+//                Log.d("MAP FRAGMENT REPORTS ",
+//                    "LAT ${it.latitude} " + "LONG ${it.longitude}")
+//                clear()
                 addMarker(
                     MarkerOptions()
                         .position(coordinates)

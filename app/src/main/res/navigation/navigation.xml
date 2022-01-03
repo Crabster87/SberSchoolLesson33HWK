@@ -22,4 +22,10 @@
         tools:layout="@layout/fragment_map" >
     </fragment>
 
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="crabster.rudakov.sberschoollesson33hwk.ui.settings.SettingsFragment"
+        android:label="@string/fragment_label_settings"
+        tools:layout="@layout/fragment_settings"/>
+
 </navigation>
