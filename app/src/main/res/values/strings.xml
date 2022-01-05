@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">SberSchoolLesson33HWK</string>
-    <string name="map_key">AIzaSyCFvVbS0hRnrsyxXwyWE0CnMg-kH9LvSYY</string>
     <string name="fragment_label_map">MAP</string>
     <string name="fragment_label_weather">WEATHER</string>
     <string name="fragment_label_settings">SETTINGS</string>
