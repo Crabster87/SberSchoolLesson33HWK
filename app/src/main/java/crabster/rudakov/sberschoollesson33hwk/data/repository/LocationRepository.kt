@@ -6,7 +6,7 @@ import io.reactivex.Single
 class LocationRepository {
 
 //    fun getCurrentLocation(): Single<List<Coordinate>> {
-//        return RetrofitClient.api.getCountryList()
+//        return RetrofitClient.api.getWeather()
 //    }
 
 }

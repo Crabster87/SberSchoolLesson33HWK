@@ -39,7 +39,7 @@ class WeatherFragment : Fragment(){
         _binding = FragmentWeatherBinding.inflate(inflater, container, false)
 
         weatherFragmentSharedViewModel =
-            ViewModelProvider(this)[WeatherFragmentSharedViewModel::class.java]
+            ViewModelProvider(requireActivity())[WeatherFragmentSharedViewModel::class.java]
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         binding.startRideButton.setOnClickListener {

@@ -29,9 +29,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     ): View {
         _binding = FragmentMapBinding.inflate(inflater, container, false)
         weatherFragmentSharedViewModel =
-            ViewModelProvider(this)[WeatherFragmentSharedViewModel::class.java]
-//        Log.d("MAP FRAGMENT REPORTS ",
-//            "LAT ${weatherFragmentSharedViewModel.getCoordinate().value?.latitude} " + "LONG ${weatherFragmentSharedViewModel.getCoordinate().value?.longitude}")
+            ViewModelProvider(requireActivity())[WeatherFragmentSharedViewModel::class.java]
+        Log.d("MAP FRAGMENT REPORTS ",
+            "LAT ${weatherFragmentSharedViewModel.getCoordinate().value?.latitude} " + "LONG ${weatherFragmentSharedViewModel.getCoordinate().value?.longitude}")
 
         return binding.root
     }
