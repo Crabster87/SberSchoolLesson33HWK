@@ -43,15 +43,15 @@
             android:gravity="center">
 
             <TextView
-                android:id="@+id/textViewDTempDet"
+                android:id="@+id/textViewTemperature"
                 style="@style/Grid" />
 
             <TextView
-                android:id="@+id/textViewNTempDet"
+                android:id="@+id/textViewPressure"
                 style="@style/Grid" />
 
             <TextView
-                android:id="@+id/textViewHumDet"
+                android:id="@+id/textViewHumidity"
                 style="@style/Grid" />
         </TableRow>
 
@@ -61,15 +61,15 @@
             android:gravity="center">
 
             <TextView
-                android:id="@+id/textViewPressDet"
+                android:id="@+id/textViewUvi"
                 style="@style/Grid" />
 
             <TextView
-                android:id="@+id/textViewWindSDet"
+                android:id="@+id/textViewClouds"
                 style="@style/Grid" />
 
             <TextView
-                android:id="@+id/textViewWDegreeDet"
+                android:id="@+id/textViewWindSpeed"
                 style="@style/Grid" />
         </TableRow>
 
@@ -79,15 +79,15 @@
             android:gravity="center">
 
             <TextView
-                android:id="@+id/textViewSriseDet"
+                android:id="@+id/textViewMain"
                 style="@style/Grid" />
 
             <TextView
-                android:id="@+id/textViewSsetDet"
+                android:id="@+id/textViewDescription"
                 style="@style/Grid" />
 
             <TextView
-                android:id="@+id/textViewDpointDet"
+                android:id="@+id/textViewIcon"
                 style="@style/Grid" />
         </TableRow>
     </TableLayout>

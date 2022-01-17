@@ -27,8 +27,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setColorTheme() {
-        val dataPreferences = getSharedPreferences(getString(R.string.shared_preferences_storage_name), MODE_PRIVATE)
-        val isDarkThemeOn = dataPreferences.getBoolean(getString(R.string.dark_theme_status_key), false)
+        val dataPreferences =
+            getSharedPreferences(getString(R.string.shared_preferences_storage_name), MODE_PRIVATE)
+        val isDarkThemeOn =
+            dataPreferences.getBoolean(getString(R.string.dark_theme_status_key), false)
         if (isDarkThemeOn) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {

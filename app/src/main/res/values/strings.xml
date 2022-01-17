@@ -17,4 +17,5 @@
     <string name="dark_theme_pref_key">dark_theme_pref_key</string>
     <string name="shared_preferences_storage_name">Saved Data</string>
     <string name="dark_theme_status_key">dark_theme_is_on</string>
+    <string name="snackbar_msg_location">Please turn on location</string>
 </resources>
