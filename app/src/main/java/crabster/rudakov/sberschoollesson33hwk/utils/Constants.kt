@@ -7,5 +7,6 @@ object Constants {
     const val EXCLUDED_PARAMS = "minutely,hourly,daily"
     const val UNIT_PARAMS = "metric"
     const val API_KEY = "d62fd8845d950b98509f5c07cd1f06bd"
+    const val DATE_FORMAT = "dd/MM/yyyy HH:mm:ss"
 
 }

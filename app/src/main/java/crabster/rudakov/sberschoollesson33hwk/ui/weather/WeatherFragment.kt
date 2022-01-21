@@ -11,18 +11,23 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.google.android.gms.location.*
 import com.google.android.material.snackbar.Snackbar
 import crabster.rudakov.sberschoollesson33hwk.R
 import crabster.rudakov.sberschoollesson33hwk.data.model.Coordinate
 import crabster.rudakov.sberschoollesson33hwk.databinding.FragmentWeatherBinding
+import crabster.rudakov.sberschoollesson33hwk.utils.Constants
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 class WeatherFragment : Fragment() {
 
@@ -44,7 +49,7 @@ class WeatherFragment : Fragment() {
             ViewModelProvider(requireActivity())[WeatherFragmentSharedViewModel::class.java]
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-        binding.startRideButton.setOnClickListener {
+        binding.getWeatherButton.setOnClickListener {
             getLastLocation()
         }
         return binding.root
@@ -82,8 +87,7 @@ class WeatherFragment : Fragment() {
         )
         weatherFragmentSharedViewModel.requestLocalWeather()
         getWeatherInLocation()
-        Log.d(
-            "CURRENT COORDINATE IS ",
+        showSnackBar(
             "LAT ${weatherFragmentSharedViewModel.getCoordinate().value?.latitude} " +
                     "LONG ${weatherFragmentSharedViewModel.getCoordinate().value?.longitude}"
         )
@@ -162,16 +166,23 @@ class WeatherFragment : Fragment() {
     private fun getWeatherInLocation() {
         weatherFragmentSharedViewModel.getLocalWeather().observe(viewLifecycleOwner) {
 
+            binding.textViewCurrentTime.text =
+                "Current time: ${convertCurrentData(it.currentParams.dt, it.timezone)}"
+            binding.textViewTimeZone.text = "Timezone: ${it.timezone}"
+
             binding.textViewTemperature.text = "Temperature \n${it.currentParams.temp} C"
             binding.textViewPressure.text = "Pressure \n${it.currentParams.pressure} hPa"
             binding.textViewHumidity.text = "Humidity \n${it.currentParams.humidity} %"
             binding.textViewUvi.text = "UV index \n${it.currentParams.uvi}"
             binding.textViewClouds.text = "Cloudiness \n${it.currentParams.clouds} %"
             binding.textViewWindSpeed.text = "Wind speed \n${it.currentParams.wind_speed} m/s"
-
             binding.textViewMain.text = it.currentParams.currentConditions[0].main
             binding.textViewDescription.text = it.currentParams.currentConditions[0].description
-//            binding.textViewIcon.text = it.currentParams.currentConditions[0].icon
+            binding.textViewVisibility.text = "Visibility \n${it.currentParams.visibility} m"
+        }
+
+        weatherFragmentSharedViewModel.getIcon().observe(viewLifecycleOwner) {
+            Glide.with(this).load(it).into(binding.imageViewWeatherIcon)
         }
 
         weatherFragmentSharedViewModel.exception().observe(
@@ -181,11 +192,19 @@ class WeatherFragment : Fragment() {
         }
     }
 
+    @SuppressLint("NewApi")
+    private fun convertCurrentData(millis: Long, timeZone: String): String {
+        val formatter = DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)
+        val instant = Instant.ofEpochMilli(millis * 1000)
+        val date = LocalDateTime.ofInstant(instant, ZoneId.of(timeZone))
+        return formatter.format(date)
+    }
+
     private fun showSnackBar(message: String) {
         Snackbar
             .make(_binding!!.root, message, Snackbar.LENGTH_LONG)
-            .setBackgroundTint(Color.RED)
-            .setTextColor(Color.YELLOW)
+            .setBackgroundTint(Color.YELLOW)
+            .setTextColor(Color.RED)
             .show()
     }
 

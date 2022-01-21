@@ -6,6 +6,13 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="Time">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/yellow</item>
+    </style>
+
     <style name="Grid">
         <item name="android:layout_width">100dp</item>
         <item name="android:layout_height">100dp</item>

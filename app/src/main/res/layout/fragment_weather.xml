@@ -17,16 +17,43 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/start_ride_button"
+        android:id="@+id/get_weather_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_settings_white_24dp"
         app:fabCustomSize="64dp"
-        app:layout_constraintBottom_toTopOf="@+id/weather_parameters"
+        app:layout_constraintBottom_toTopOf="@+id/textViewCurrentTime"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_title"
         app:maxImageSize="48dp" />
+
+    <TextView
+        android:id="@+id/textViewCurrentTime"
+        style="@style/Time"
+        app:layout_constraintBottom_toTopOf="@+id/weather_parameters"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/get_weather_button" />
+
+    <TextView
+        android:id="@+id/textViewTimeZone"
+        style="@style/Time"
+        app:layout_constraintBottom_toTopOf="@+id/weather_parameters"
+        app:layout_constraintStart_toStartOf="@+id/textViewCurrentTime"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCurrentTime" />
+
+    <ImageView
+        android:id="@+id/imageViewWeatherIcon"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:layout_constraintBottom_toTopOf="@+id/weather_parameters"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toEndOf="@+id/textViewCurrentTime"
+        app:layout_constraintTop_toBottomOf="@+id/get_weather_button"
+        app:layout_constraintVertical_bias="0.9" />
 
     <TableLayout
         android:id="@+id/weather_parameters"
@@ -35,7 +62,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_ride_button">
+        app:layout_constraintTop_toBottomOf="@+id/textViewTimeZone">
 
         <TableRow
             android:layout_width="wrap_content"
@@ -87,7 +114,7 @@
                 style="@style/Grid" />
 
             <TextView
-                android:id="@+id/textViewIcon"
+                android:id="@+id/textViewVisibility"
                 style="@style/Grid" />
         </TableRow>
     </TableLayout>

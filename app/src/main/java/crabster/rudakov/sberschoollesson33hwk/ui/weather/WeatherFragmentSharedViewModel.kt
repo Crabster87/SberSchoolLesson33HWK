@@ -14,6 +14,7 @@ class WeatherFragmentSharedViewModel : ViewModel() {
 
     private val coordinate = MutableLiveData<Coordinate>()
     private val localWeather = MutableLiveData<LocalWeather>()
+    private val iconUrl = MutableLiveData<String>()
     private var exception = MutableLiveData<String>()
 
     private var weatherRepository = WeatherRepository()
@@ -31,6 +32,10 @@ class WeatherFragmentSharedViewModel : ViewModel() {
         return localWeather
     }
 
+    fun getIcon(): LiveData<String> {
+        return iconUrl
+    }
+
     fun requestLocalWeather() {
         disposable = weatherRepository.getCurrentWeather(
             coordinate.value!!.latitude,
@@ -40,6 +45,8 @@ class WeatherFragmentSharedViewModel : ViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 localWeather.value = it
+                iconUrl.value =
+                    "http://openweathermap.org/img/wn/${it.currentParams.currentConditions[0].icon}@2x.png"
             }, {
                 exception.value = it.toString()
             })
