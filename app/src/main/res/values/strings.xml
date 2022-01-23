@@ -18,4 +18,10 @@
     <string name="shared_preferences_storage_name">Saved Data</string>
     <string name="dark_theme_status_key">dark_theme_is_on</string>
     <string name="snackbar_msg_location">Please turn on location</string>
+    <string name="latitude_header">Latitude: </string>
+    <string name="longitude_header">Longitude: </string>
+    <string name="country_header">Country: </string>
+    <string name="locality_header">Locality: </string>
+    <string name="address_header">Address: </string>
+    <string name="sub_admin_area_header">Area: </string>
 </resources>

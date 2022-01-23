@@ -1,7 +1,8 @@
 package crabster.rudakov.sberschoollesson33hwk.ui.map
 
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import crabster.rudakov.sberschoollesson33hwk.R
 import crabster.rudakov.sberschoollesson33hwk.databinding.FragmentMapBinding
 import crabster.rudakov.sberschoollesson33hwk.ui.weather.WeatherFragmentSharedViewModel
+import crabster.rudakov.sberschoollesson33hwk.utils.SnackBarReceiver
+import java.util.*
 
 class MapFragment : Fragment(), OnMapReadyCallback {
 
@@ -30,9 +33,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         _binding = FragmentMapBinding.inflate(inflater, container, false)
         weatherFragmentSharedViewModel =
             ViewModelProvider(requireActivity())[WeatherFragmentSharedViewModel::class.java]
-        Log.d("MAP FRAGMENT REPORTS ",
-            "LAT ${weatherFragmentSharedViewModel.getCoordinate().value?.latitude} " + "LONG ${weatherFragmentSharedViewModel.getCoordinate().value?.longitude}")
-
+        getGeoCodingData()
         return binding.root
     }
 
@@ -45,9 +46,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         weatherFragmentSharedViewModel.getCoordinate().observe(viewLifecycleOwner) {
             p0.apply {
                 val coordinates = LatLng(it.latitude, it.longitude)
-//                Log.d("MAP FRAGMENT REPORTS ",
-//                    "LAT ${it.latitude} " + "LONG ${it.longitude}")
-//                clear()
                 addMarker(
                     MarkerOptions()
                         .position(coordinates)
@@ -55,6 +53,29 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 )
                 moveCamera(CameraUpdateFactory.newLatLng(coordinates))
             }
+        }
+    }
+
+    private fun getGeoCodingData() {
+        weatherFragmentSharedViewModel.getCoordinate().observe(viewLifecycleOwner) {
+            val geocoder = Geocoder(requireActivity(), Locale.getDefault())
+            val list: List<Address> =
+                geocoder.getFromLocation(it.latitude, it.longitude, 1)
+            binding.apply {
+                instanceLatitude.text = list[0].latitude.toString()
+                instanceLongitude.text = list[0].longitude.toString()
+                instanceCountry.text = list[0].countryName
+                instanceLocality.text = list[0].locality
+                instanceAddress.text = list[0].getAddressLine(0)
+                instanceSubAdminArea.text = list[0].subAdminArea
+            }
+
+        }
+
+        weatherFragmentSharedViewModel.exception().observe(
+            viewLifecycleOwner
+        ) {
+            SnackBarReceiver.show(_binding!!.root, it)
         }
     }
 
