@@ -46,6 +46,7 @@ class WeatherFragment : Fragment() {
 
         weatherFragmentSharedViewModel =
             ViewModelProvider(requireActivity())[WeatherFragmentSharedViewModel::class.java]
+        getWeatherInLocation()
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         binding.getWeatherButton.setOnClickListener {
