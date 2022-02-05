@@ -20,10 +20,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
         view.setBackgroundResource(R.drawable.background_gradient)
     }
 
-    override fun onPreferenceTreeClick(preference: Preference?): Boolean {
+    override fun onPreferenceTreeClick(preference: Preference): Boolean {
         val prefs = PreferenceManager.getDefaultSharedPreferences(requireActivity())
         switchDarkTheme(prefs)
-        preference?.let {
+        preference.let {
             if (it.key == getString(R.string.dark_theme_pref_key)) {
                 activity?.recreate()
             }

@@ -86,6 +86,11 @@ class WeatherFragment : Fragment() {
             )
         )
         weatherFragmentSharedViewModel.requestLocalWeather()
+        SnackBarReceiver.show(
+            _binding!!.root,
+            "LAT ${weatherFragmentSharedViewModel.getCoordinate().value?.latitude} " +
+                    "LONG ${weatherFragmentSharedViewModel.getCoordinate().value?.longitude}"
+        )
         getWeatherInLocation()
     }
 
