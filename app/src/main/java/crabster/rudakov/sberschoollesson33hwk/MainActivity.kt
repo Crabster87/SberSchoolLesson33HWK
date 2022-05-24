@@ -3,21 +3,17 @@ package crabster.rudakov.sberschoollesson33hwk
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import crabster.rudakov.sberschoollesson33hwk.ui.weather.WeatherFragmentSharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var weatherFragmentSharedViewModel: WeatherFragmentSharedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        weatherFragmentSharedViewModel =
-            ViewModelProvider(this)[WeatherFragmentSharedViewModel::class.java]
         setColorTheme()
         setContentView(R.layout.activity_main)
 

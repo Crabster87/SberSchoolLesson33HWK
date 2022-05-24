@@ -6,18 +6,20 @@ import androidx.lifecycle.ViewModel
 import crabster.rudakov.sberschoollesson33hwk.data.model.Coordinate
 import crabster.rudakov.sberschoollesson33hwk.data.model.LocalWeather
 import crabster.rudakov.sberschoollesson33hwk.data.repository.WeatherRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class WeatherFragmentSharedViewModel : ViewModel() {
+@HiltViewModel
+class WeatherFragmentSharedViewModel @Inject constructor(private var weatherRepository: WeatherRepository) :
+    ViewModel() {
 
     private val coordinate = MutableLiveData<Coordinate>()
     private val localWeather = MutableLiveData<LocalWeather>()
     private val iconUrl = MutableLiveData<String>()
     private var exception = MutableLiveData<String>()
-
-    private var weatherRepository = WeatherRepository()
     private lateinit var disposable: Disposable
 
     fun getCoordinate(): LiveData<Coordinate> {

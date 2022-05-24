@@ -15,7 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.google.android.gms.location.*
 import crabster.rudakov.sberschoollesson33hwk.R
@@ -23,11 +23,13 @@ import crabster.rudakov.sberschoollesson33hwk.data.model.Coordinate
 import crabster.rudakov.sberschoollesson33hwk.databinding.FragmentWeatherBinding
 import crabster.rudakov.sberschoollesson33hwk.utils.Constants
 import crabster.rudakov.sberschoollesson33hwk.utils.SnackBarReceiver
+import dagger.hilt.android.AndroidEntryPoint
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
+@AndroidEntryPoint
 class WeatherFragment : Fragment() {
 
     private var _binding: FragmentWeatherBinding? = null
@@ -35,7 +37,8 @@ class WeatherFragment : Fragment() {
 
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
     private val permissionId = 42
-    private lateinit var weatherFragmentSharedViewModel: WeatherFragmentSharedViewModel
+
+    private val weatherFragmentSharedViewModel by activityViewModels<WeatherFragmentSharedViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,16 +46,15 @@ class WeatherFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentWeatherBinding.inflate(inflater, container, false)
-
-        weatherFragmentSharedViewModel =
-            ViewModelProvider(requireActivity())[WeatherFragmentSharedViewModel::class.java]
         getWeatherInLocation()
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         binding.getWeatherButton.setOnClickListener {
             getLastLocation()
         }
-        return binding.root
     }
 
     @SuppressLint("MissingPermission")

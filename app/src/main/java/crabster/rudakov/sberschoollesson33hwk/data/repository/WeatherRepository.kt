@@ -3,9 +3,12 @@ package crabster.rudakov.sberschoollesson33hwk.data.repository
 import crabster.rudakov.sberschoollesson33hwk.utils.Constants
 import crabster.rudakov.sberschoollesson33hwk.data.api.RetrofitClient
 import crabster.rudakov.sberschoollesson33hwk.data.model.LocalWeather
+import dagger.hilt.android.scopes.ViewModelScoped
 import io.reactivex.Single
+import javax.inject.Inject
 
-class WeatherRepository {
+@ViewModelScoped
+class WeatherRepository @Inject constructor() {
 
     fun getCurrentWeather(latitude: Double, longitude: Double): Single<LocalWeather> {
         return RetrofitClient.api.getWeather(

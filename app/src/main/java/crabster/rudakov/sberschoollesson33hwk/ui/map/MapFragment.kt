@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -17,11 +17,13 @@ import crabster.rudakov.sberschoollesson33hwk.R
 import crabster.rudakov.sberschoollesson33hwk.databinding.FragmentMapBinding
 import crabster.rudakov.sberschoollesson33hwk.ui.weather.WeatherFragmentSharedViewModel
 import crabster.rudakov.sberschoollesson33hwk.utils.SnackBarReceiver
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
+@AndroidEntryPoint
 class MapFragment : Fragment(), OnMapReadyCallback {
 
-    private lateinit var weatherFragmentSharedViewModel: WeatherFragmentSharedViewModel
+    private val weatherFragmentSharedViewModel by activityViewModels<WeatherFragmentSharedViewModel>()
     private var _binding: FragmentMapBinding? = null
     private val binding get() = _binding!!
 
@@ -31,8 +33,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMapBinding.inflate(inflater, container, false)
-        weatherFragmentSharedViewModel =
-            ViewModelProvider(requireActivity())[WeatherFragmentSharedViewModel::class.java]
         getGeoCodingData()
         return binding.root
     }
@@ -69,7 +69,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 instanceAddress.text = list[0].getAddressLine(0)
                 instanceSubAdminArea.text = list[0].subAdminArea
             }
-
         }
 
         weatherFragmentSharedViewModel.exception().observe(
