@@ -48,7 +48,7 @@ class WeatherFragmentSharedViewModel @Inject constructor(private var weatherRepo
             .subscribe({
                 localWeather.value = it
                 iconUrl.value =
-                    "http://openweathermap.org/img/wn/${it.currentParams.currentConditions[0].icon}@2x.png"
+                    "https://openweathermap.org/img/wn/${it.currentParams.currentConditions[0].icon}@2x.png"
             }, {
                 exception.value = it.toString()
             })
